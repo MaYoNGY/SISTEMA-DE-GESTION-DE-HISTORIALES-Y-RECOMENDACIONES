@@ -1,7 +1,7 @@
-#include <iostream>
-using namespace std;
+#include "Controlador/Controlador.h"
 
 int main() {
-    cout << "Hello, World!" << endl;
+    Controlador controlador;
+    controlador.ejecutar();
     return 0;
 }

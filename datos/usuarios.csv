@@ -1,0 +1,5 @@
+id,alias,nombreCompleto,correo,contrasenia,tipo,activo
+1,admin,Administrador del Sistema,admin@streaming.com,admin123,ADMIN,1
+2,usuario1,Juan Perez,juan@email.com,1234,USUARIO,1
+3,usuario2,Maria Garcia,maria@email.com,1234,USUARIO,1
+4,mayo,Marjorie Cedeno,mjcedeno5@espe.edu.ec,mayo123,USUARIO,1

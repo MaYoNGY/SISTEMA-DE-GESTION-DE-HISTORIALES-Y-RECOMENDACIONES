@@ -1,0 +1,21 @@
+id,titulo,tipo,genero,anio,descripcion,calificacion,activo
+1,El Padrino,Pelicula,Drama,1972,Historia de la familia Corleone,9.2,1
+2,Inception,Pelicula,Ciencia Ficcion,2010,Un ladron que roba secretos a traves de los suenos,8.8,1
+3,Breaking Bad,Serie,Drama,2008,Profesor de quimica se convierte en narcotraficante,9.5,1
+4,The Office,Serie,Comedia,2005,Vida cotidiana en una oficina de papel,8.9,1
+5,El Conjuro,Pelicula,Terror,2013,Investigadores paranormales enfrentan un caso aterrador,7.5,1
+6,Stranger Things,Serie,Ciencia Ficcion,2016,Ninos enfrentan fuerzas sobrenaturales en los 80s,8.7,1
+7,Titanic,Pelicula,Romance,1997,Historia de amor en el famoso transatlantico,7.9,1
+8,Planet Earth,Serie,Documental,2006,Exploracion de la naturaleza del planeta,9.4,1
+9,Spider-Man,Pelicula,Accion,2002,Joven obtiene poderes de arana,7.4,1
+10,Toy Story,Pelicula,Animacion,1995,Juguetes cobran vida,8.3,1
+11,The Dark Knight,Pelicula,Accion,2008,Batman enfrenta al Joker en Gotham City,9,1
+12,Friends,Serie,Comedia,1994,Seis amigos en Nueva York,8.9,1
+13,Interstellar,Pelicula,Ciencia Ficcion,2014,Viaje espacial para salvar la humanidad,8.6,1
+14,Game of Thrones,Serie,Drama,2011,Lucha por el Trono de Hierro,9.3,1
+15,El Exorcista,Pelicula,Terror,1973,Una nina es poseida por un demonio,8.1,1
+16,Avatar,Pelicula,Ciencia Ficcion,2009,Humanos en el planeta Pandora,7.9,1
+17,The Mandalorian,Serie,Ciencia Ficcion,2019,Cazarrecompensas en el universo Star Wars,8.8,1
+18,Coco,Pelicula,Animacion,2017,Nino mexicano en el mundo de los muertos,8.4,1
+19,La Casa de Papel,Serie,Accion,2017,Atraco al banco de Espana,8.2,1
+20,Forrest Gump,Pelicula,Drama,1994,Historia de un hombre con vida extraordinaria,8.8,1
