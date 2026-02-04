@@ -2,11 +2,39 @@
 
 Historial::Historial() : acciones(1000) {} // Sin limite automatico, se controla manualmente
 
-void Historial::inhabilitarMasAntiguo() {
-    // Marcar como inactivo el registro mas antiguo (el del frente)
+int Historial::contarActivos() const {
+    int contador = 0;
     Nodo<RegistroHistorial>* actual = acciones.getFrente();
-    if (actual != nullptr) {
-        actual->dato.setActivo(false);
+    while (actual != nullptr) {
+        if (actual->dato.esActivo()) {
+            contador++;
+        }
+        actual = actual->siguiente;
+    }
+    return contador;
+}
+
+void Historial::inhabilitarMasAntiguo() {
+    // Buscar el primer registro ACTIVO (el mas antiguo activo) y desactivarlo
+    Nodo<RegistroHistorial>* actual = acciones.getFrente();
+    while (actual != nullptr) {
+        if (actual->dato.esActivo()) {
+            actual->dato.setActivo(false);
+            return; // Solo desactivar el primero activo
+        }
+        actual = actual->siguiente;
+    }
+}
+
+void Historial::desactivarContenido(int idContenido) {
+    // Desactivar un contenido especifico por su ID
+    Nodo<RegistroHistorial>* actual = acciones.getFrente();
+    while (actual != nullptr) {
+        if (actual->dato.esActivo() && actual->dato.getContenido().getId() == idContenido) {
+            actual->dato.setActivo(false);
+            return;
+        }
+        actual = actual->siguiente;
     }
 }
 
@@ -22,20 +50,21 @@ bool Historial::existeContenido(int idContenido) const {
     return false;
 }
 
-bool Historial::registrarVisualizacion(const Contenido& c){
-    // Verificar si ya existe en el historial (solo activos)
+void Historial::registrarVisualizacion(const Contenido& c){
+    // Si ya existe en el historial (activo), desactivarlo para moverlo al final
     if (existeContenido(c.getId())) {
-        return false; // Ya existe, no agregar duplicado
+        desactivarContenido(c.getId());
+    } else {
+        // Solo verificar limite si es contenido nuevo (no existia antes)
+        // Contar registros activos
+        if (contarActivos() >= LIMITE) {
+            inhabilitarMasAntiguo();
+        }
     }
     
-    // Si ya hay 8 registros, inhabilitar el mas antiguo
-    if (acciones.getTamanio() >= LIMITE) {
-        inhabilitarMasAntiguo();
-    }
-    
+    // Agregar el contenido al final (mas reciente)
     RegistroHistorial r(c);
     acciones.encolar(r);
-    return true; // Agregado exitosamente
 }
 
 void Historial::eliminarPorId(int idContenido) {

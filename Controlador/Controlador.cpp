@@ -799,12 +799,9 @@ void Controlador::marcarComoVisto() {
     vista.mostrarDetallesContenido(*contenido);
     
     if (historialActual != nullptr) {
-        if (historialActual->registrarVisualizacion(*contenido)) {
-            guardarDatos();
-            vista.mostrarExito("Contenido marcado como visto!");
-        } else {
-            vista.mostrarError("Este contenido ya esta en tu historial.");
-        }
+        historialActual->registrarVisualizacion(*contenido);
+        guardarDatos();
+        vista.mostrarExito("Contenido marcado como visto!");
     }
     
     vista.pausar();

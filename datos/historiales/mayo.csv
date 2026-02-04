@@ -1,10 +1,19 @@
 idContenido,titulo,tipo,genero,fecha,activo
-2,Inception,Pelicula,Ciencia Ficcion,2026-02-02 05:15:57,1
-4,The Office,Serie,Comedia,2026-02-02 05:16:01,1
-12,Friends,Serie,Comedia,2026-02-02 05:16:06,1
-15,El Exorcista,Pelicula,Terror,2026-02-02 05:16:10,1
-6,Stranger Things,Serie,Ciencia Ficcion,2026-02-02 05:16:13,1
-7,Titanic,Pelicula,Romance,2026-02-02 05:16:19,1
-18,Coco,Pelicula,Animacion,2026-02-02 05:16:38,1
-9,Spider-Man,Pelicula,Accion,2026-02-02 05:18:38,1
-11,The Dark Knight,Pelicula,Accion,2026-02-02 05:26:10,1
+4,The Office,Serie,Comedia,2026-02-02 05:16:01,0
+12,Friends,Serie,Comedia,2026-02-02 05:16:06,0
+15,El Exorcista,Pelicula,Terror,2026-02-02 05:16:10,0
+6,Stranger Things,Serie,Ciencia Ficcion,2026-02-02 05:16:13,0
+7,Titanic,Pelicula,Romance,2026-02-02 05:16:19,0
+18,Coco,Pelicula,Animacion,2026-02-02 05:16:38,0
+9,Spider-Man,Pelicula,Accion,2026-02-02 05:18:38,0
+11,The Dark Knight,Pelicula,Accion,2026-02-02 05:26:10,0
+3,Breaking Bad,Serie,Drama,2026-02-03 22:04:23,1
+5,El Conjuro,Pelicula,Terror,2026-02-03 22:04:37,1
+13,Interstellar,Pelicula,Ciencia Ficcion,2026-02-03 22:09:35,1
+15,El Exorcista,Pelicula,Terror,2026-02-03 22:09:50,1
+12,Friends,Serie,Comedia,2026-02-03 22:10:24,1
+8,Planet Earth,Serie,Documental,2026-02-03 22:11:19,1
+19,La Casa de Papel,Serie,Accion,2026-02-03 22:11:52,1
+2,Inception,Pelicula,Ciencia Ficcion,2026-02-03 22:14:33,1
+16,Avatar,Pelicula,Ciencia Ficcion,2026-02-03 22:15:16,1
+6,Stranger Things,Serie,Ciencia Ficcion,2026-02-03 22:16:31,1

@@ -10,6 +10,8 @@ class Historial{
         static const int LIMITE = 10;
         
         void inhabilitarMasAntiguo();
+        int contarActivos() const;
+        void desactivarContenido(int idContenido);
 
     public:
         // Constructor
@@ -17,7 +19,7 @@ class Historial{
 
         // Usuario común
         bool existeContenido(int idContenido) const;
-        bool registrarVisualizacion(const Contenido& c);
+        void registrarVisualizacion(const Contenido& c);
 
         // Admin
         void eliminarPorId(int idContenido);
