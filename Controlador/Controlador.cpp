@@ -149,14 +149,8 @@ bool Controlador::login() {
     
     Usuario* usuario = usuarioManager.buscarPorAlias(alias);
     
-    if (usuario == nullptr) {
-        vista.mostrarError("Usuario no encontrado.");
-        vista.pausar();
-        return false;
-    }
-    
-    if (!usuario->validarContrasenia(contrasenia)) {
-        vista.mostrarError("Contrasenia incorrecta.");
+    if (usuario == nullptr || !usuario->validarContrasenia(contrasenia)) {
+        vista.mostrarError("Usuario o contrasenia incorrectos.");
         vista.pausar();
         return false;
     }
@@ -180,11 +174,43 @@ bool Controlador::registrarUsuario() {
     string alias, nombreCompleto, correo, contrasenia;
     
     vista.limpiarPantalla();
-    vista.mostrarFormularioRegistroUsuario(alias, nombreCompleto, correo, contrasenia);
+    vista.mostrarCabecera("REGISTRO DE USUARIO");
+    cout << endl;
+    cout << "(Escriba 'cancelar' como alias para volver)" << endl << endl;
     
-    // Verificar si el alias ya existe
-    if (usuarioManager.buscarPorAlias(alias) != nullptr) {
-        vista.mostrarError("El alias ya esta en uso. Elija otro.");
+    // Pedir alias y validar que no exista
+    while (true) {
+        alias = Validacion::pedirAlias();
+        if (alias == "cancelar") {
+            vista.mostrarMensaje("Registro cancelado.");
+            vista.pausar();
+            return false;
+        }
+        if (usuarioManager.buscarPorAlias(alias) != nullptr) {
+            vista.mostrarError("El alias '" + alias + "' ya esta en uso. Intente con otro.");
+        } else {
+            break;
+        }
+    }
+    
+    nombreCompleto = Validacion::pedirNombreCompleto();
+    
+    // Pedir correo y validar que no exista
+    while (true) {
+        correo = Validacion::pedirCorreo();
+        if (usuarioManager.buscarPorCorreo(correo) != nullptr) {
+            vista.mostrarError("El correo '" + correo + "' ya esta registrado. Intente con otro.");
+        } else {
+            break;
+        }
+    }
+    
+    contrasenia = Validacion::pedirContrasenia();
+    
+    // Confirmar registro
+    char confirmar = Validacion::pedirConfirmacion("Confirmar registro?");
+    if (confirmar == 'N') {
+        vista.mostrarMensaje("Registro cancelado.");
         vista.pausar();
         return false;
     }
@@ -260,6 +286,9 @@ void Controlador::menuGestionContenido() {
                 eliminarContenido();
                 break;
             case 4:
+                activarContenido();
+                break;
+            case 5:
                 verCatalogo();
                 break;
             case 0:
@@ -342,10 +371,36 @@ void Controlador::agregarContenido() {
     float calificacion;
     
     vista.limpiarPantalla();
-    vista.mostrarFormularioAgregarContenido(id, titulo, tipo, genero, anio, descripcion, calificacion);
+    vista.mostrarCabecera("AGREGAR NUEVO CONTENIDO");
+    cout << endl;
+    cout << "(Ingrese ID 0 para cancelar)" << endl << endl;
     
-    if (contenidoManager.buscarPorId(id) != nullptr) {
-        vista.mostrarError("Ya existe un contenido con ese ID.");
+    // Pedir ID y validar que no exista
+    while (true) {
+        id = Validacion::pedirEntero("ID: ", 0, 9999);
+        if (id == 0) {
+            vista.mostrarMensaje("Operacion cancelada.");
+            vista.pausar();
+            return;
+        }
+        if (contenidoManager.buscarPorId(id) != nullptr) {
+            vista.mostrarError("Ya existe un contenido con ese ID. Intente otro.");
+        } else {
+            break;
+        }
+    }
+    
+    titulo = Validacion::pedirTitulo();
+    tipo = Validacion::pedirTipoContenido();
+    genero = Validacion::pedirGenero();
+    anio = Validacion::pedirAnio();
+    descripcion = Validacion::pedirDescripcion();
+    calificacion = Validacion::pedirCalificacion();
+    
+    // Confirmar antes de agregar
+    char confirmar = Validacion::pedirConfirmacion("Confirmar agregar contenido?");
+    if (confirmar == 'N') {
+        vista.mostrarMensaje("Operacion cancelada.");
         vista.pausar();
         return;
     }
@@ -450,6 +505,42 @@ void Controlador::eliminarContenido() {
         guardarDatos();
         
         vista.mostrarExito("Contenido inhabilitado correctamente!");
+    } else {
+        vista.mostrarMensaje("Operacion cancelada.");
+    }
+    
+    vista.pausar();
+}
+
+void Controlador::activarContenido() {
+    vista.limpiarPantalla();
+    vista.mostrarListaContenidosTodos(getCatalogo());
+    
+    cout << endl;
+    int id = vista.pedirIdContenido();
+    
+    Contenido* contenido = contenidoManager.buscarPorId(id);
+    if (contenido == nullptr) {
+        vista.mostrarError("Contenido no encontrado.");
+        vista.pausar();
+        return;
+    }
+    
+    if (contenido->esActivo()) {
+        vista.mostrarError("Este contenido ya esta activo.");
+        vista.pausar();
+        return;
+    }
+    
+    vista.mostrarContenido(*contenido);
+    
+    char confirmar = Validacion::pedirConfirmacion("Activar este contenido?");
+    
+    if (confirmar == 'S') {
+        contenido->setActivo(true);
+        guardarDatos();
+        
+        vista.mostrarExito("Contenido activado correctamente!");
     } else {
         vista.mostrarMensaje("Operacion cancelada.");
     }

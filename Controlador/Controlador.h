@@ -60,6 +60,7 @@ public:
     void agregarContenido();
     void modificarContenido();
     void eliminarContenido();
+    void activarContenido();
     void verCatalogo();
     void verUsuarios();
     void desactivarUsuario();

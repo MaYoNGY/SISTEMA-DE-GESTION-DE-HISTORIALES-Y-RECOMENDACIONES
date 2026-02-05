@@ -12,6 +12,7 @@ class UsuarioManager{
         void registrar(const Usuario& u);
         Usuario* buscarPorAlias(const string& alias);
         Usuario* buscarPorId(int id);
+        Usuario* buscarPorCorreo(const string& correo);
         bool eliminarPorAlias(const string& alias);
         ListaDoble<Usuario>& getListaUsuarios();
 };

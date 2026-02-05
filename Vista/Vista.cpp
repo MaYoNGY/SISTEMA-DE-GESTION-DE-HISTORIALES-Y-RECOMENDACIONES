@@ -80,11 +80,12 @@ int Vista::mostrarMenuGestionContenido() {
     mostrarCabecera("GESTION DE CONTENIDO");
     cout << "\n1. Agregar contenido" << endl;
     cout << "2. Modificar contenido" << endl;
-    cout << "3. Eliminar contenido" << endl;
-    cout << "4. Ver catalogo completo" << endl;
+    cout << "3. Inhabilitar contenido" << endl;
+    cout << "4. Activar contenido" << endl;
+    cout << "5. Ver catalogo completo" << endl;
     cout << "\n0. Volver" << endl;
     cout << endl;
-    return Validacion::pedirOpcion("Seleccione una opcion: ", 4);
+    return Validacion::pedirOpcion("Seleccione una opcion: ", 5);
 }
 
 int Vista::mostrarMenuGestionUsuarios() {
@@ -226,6 +227,51 @@ void Vista::mostrarListaContenidos(ListaDoble<Contenido>& lista) {
     }
     
     mostrarLinea(70);
+    cout << "  Total: " << contador << " titulo(s)" << endl;
+}
+
+void Vista::mostrarListaContenidosTodos(ListaDoble<Contenido>& lista) {
+    mostrarCabecera("TODOS LOS CONTENIDOS (ACTIVOS E INACTIVOS)");
+    
+    if (lista.estaVacia()) {
+        cout << "\nNo hay contenido disponible." << endl;
+        return;
+    }
+    
+    cout << endl;
+    cout << left << setw(5) << "ID" 
+         << setw(28) << "TITULO" 
+         << setw(12) << "TIPO" 
+         << setw(16) << "GENERO" 
+         << setw(6) << "ANIO" 
+         << setw(7) << "CALIF"
+         << "ESTADO" << endl;
+    mostrarLinea(80);
+    
+    NodoDoble<Contenido>* actual = lista.getCabeza();
+    int contador = 0;
+    
+    while (actual != nullptr) {
+        Contenido& c = actual->dato;
+        
+        string titulo = c.getTitulo();
+        if (titulo.length() > 26) {
+            titulo = titulo.substr(0, 24) + "..";
+        }
+        
+        cout << left << setw(5) << c.getId()
+             << setw(28) << titulo
+             << setw(12) << c.getTipo()
+             << setw(16) << c.getGenero()
+             << setw(6) << c.getAnio()
+             << fixed << setprecision(1) << setw(7) << c.getCalificacion()
+             << (c.esActivo() ? "Activo" : "Inactivo") << endl;
+        
+        contador++;
+        actual = actual->siguiente;
+    }
+    
+    mostrarLinea(80);
     cout << "  Total: " << contador << " titulo(s)" << endl;
 }
 

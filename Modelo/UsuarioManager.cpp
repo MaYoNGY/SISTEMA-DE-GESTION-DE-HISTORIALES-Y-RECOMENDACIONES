@@ -28,6 +28,18 @@ Usuario* UsuarioManager::buscarPorId(int id){
     return nullptr;
 }
 
+Usuario* UsuarioManager::buscarPorCorreo(const string& correo){
+    NodoDoble<Usuario>* actual = listaUsuarios.getCabeza();
+
+    while(actual != nullptr){
+        if (actual->dato.getCorreo() == correo){
+            return &actual->dato;
+        }
+        actual = actual->siguiente;
+    }
+    return nullptr;
+}
+
 bool UsuarioManager::eliminarPorAlias(const string& alias){
     NodoDoble<Usuario>* actual = listaUsuarios.getCabeza();
 

@@ -52,6 +52,7 @@ public:
     // Mostrar informacion - FORMATO MEJORADO
     void mostrarContenido(const Contenido& c);
     void mostrarListaContenidos(ListaDoble<Contenido>& lista);
+    void mostrarListaContenidosTodos(ListaDoble<Contenido>& lista);
     void mostrarTablaUsuarios(ListaDoble<Usuario>& lista);
     void mostrarHistorial(Historial& historial, const string& nombreUsuario);
     void mostrarRecomendaciones(ListaDoble<Contenido>& sugerencias);

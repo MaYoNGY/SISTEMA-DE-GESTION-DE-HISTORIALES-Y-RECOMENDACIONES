@@ -4,7 +4,7 @@ id,titulo,tipo,genero,anio,descripcion,calificacion,activo
 3,Breaking Bad,Serie,Drama,2008,Profesor de quimica se convierte en narcotraficante,9.5,1
 4,The Office,Serie,Comedia,2005,Vida cotidiana en una oficina de papel,8.9,1
 5,El Conjuro,Pelicula,Terror,2013,Investigadores paranormales enfrentan un caso aterrador,7.5,1
-6,Stranger Things,Serie,Ciencia Ficcion,2016,Ninos enfrentan fuerzas sobrenaturales en los 80s,8.7,1
+6,Stranger Things,Serie,Ciencia Ficcion,2016,Ninos enfrentan fuerzas sobrenaturales en los 80s,8.7,0
 7,Titanic,Pelicula,Romance,1997,Historia de amor en el famoso transatlantico,7.9,1
 8,Planet Earth,Serie,Documental,2006,Exploracion de la naturaleza del planeta,9.4,1
 9,Spider-Man,Pelicula,Accion,2002,Joven obtiene poderes de arana,7.4,1

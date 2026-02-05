@@ -181,7 +181,7 @@ void Recomendaciones::recomendarPorUltimoContenido(Historial& historial, ListaDo
         return;
     }
     
-    // Buscar el último contenido visto que esté activo
+    // Buscar el último contenido visto que esté activo en el historial
     Nodo<RegistroHistorial>* ultimoActivo = nullptr;
     Nodo<RegistroHistorial>* nodoActual = historial.getAcciones().getFrente();
     while(nodoActual != nullptr){
@@ -195,9 +195,10 @@ void Recomendaciones::recomendarPorUltimoContenido(Historial& historial, ListaDo
         return;
     }
     
-    Contenido ultimoVisto = ultimoActivo->dato.getContenido();
-    string generoUltimo = ultimoVisto.getGenero();
-    string tipoUltimo = ultimoVisto.getTipo();
+    // Usar genero y tipo directamente del historial (no importa si esta inactivo en catalogo)
+    string generoUltimo = ultimoActivo->dato.getContenido().getGenero();
+    string tipoUltimo = ultimoActivo->dato.getContenido().getTipo();
+    int idUltimo = ultimoActivo->dato.getContenido().getId();
     
     NodoDoble<Contenido>* actual = catalogoCompleto.getCabeza();
     int contador = 0;
@@ -205,17 +206,35 @@ void Recomendaciones::recomendarPorUltimoContenido(Historial& historial, ListaDo
     while(actual != nullptr && contador < limite){
         Contenido& c = actual->dato;
         
-        // Solo recomendar contenido activo
-        if(c.esActivo() &&
+        // Recomendar contenido activo del catalogo del mismo genero y tipo
+        if(c.esActivo() && 
            c.getGenero() == generoUltimo && 
            c.getTipo() == tipoUltimo && 
-           c.getId() != ultimoVisto.getId() &&
+           c.getId() != idUltimo &&
            !yaFueVisto(historial, c.getId())){
             sugerencias.insertar(c);
             contador++;
         }
         
         actual = actual->siguiente;
+    }
+    
+    // Si no hay del mismo tipo y genero, buscar solo por genero
+    if(contador == 0){
+        actual = catalogoCompleto.getCabeza();
+        while(actual != nullptr && contador < limite){
+            Contenido& c = actual->dato;
+            
+            if(c.esActivo() && 
+               c.getGenero() == generoUltimo && 
+               c.getId() != idUltimo &&
+               !yaFueVisto(historial, c.getId())){
+                sugerencias.insertar(c);
+                contador++;
+            }
+            
+            actual = actual->siguiente;
+        }
     }
 }
 
